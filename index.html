@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devfest</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-black">
+  <div class="w-100 min-h-screen" x-data="home">
+    <header class="fixed z-30 top-0 w-full py-5 px-4">
+      <div class="w-100 mx-auto flex max-w-6xl items-center justify-between">
+        <div class="text-slate-100 flex gap-2 items-center">
+          <div class="flex flex-col justify-center"><span>Google</span> <span
+              class="text-xs lowercase tracking-widest">Devfest</span></div> <span>|</span> <i class="text-xl text-blue-400">Asaba</i>
+        </div>
+        <ul class="flex items-center gap-6">
+          <li><button x-on:click="toggleMusic()" class="text-slate-300 transition-all duration-200 ease-out hover:text-slate-50 active:text-slate-50"
+              >
+              <template x-if="isMute === true">
+                <i data-feather="volume-x" stroke-width="2"></i>
+              </template>
+              <template x-if="isMute === false">
+                <i data-feather="volume-2" stroke-width="2"></i>
+              </template>
+            </button></li>
+          <li><button
+              class="rounded-2xl bg-slate-400 px-6 py-3 text-black transition-all duration-200 ease-out hover:bg-slate-50 focus:bg-slate-50"
+              href="#">Speakers</button></li>
+        </ul>
+      </div>
+    </header>
+    <section class="bg-black bg-gradient-to-b from-slate-800 px-6">
+      <div class="mx-auto max-w-6xl py-14 pt-40">
+        <div class="mx-auto w-full md:w-8/12 md:text-center">
+          <h1
+            class="mb-14 bg-gradient-to-b from-white to-gray-400 bg-clip-text text-5xl font-semibold text-transparent md:text-8xl text-blur">
+            An Asaba townhall for all things tech</h1>
+          <p class="mb-20 text-slate-400 object-show" style="transition-delay: 0.3s">Lorem, ipsum dolor sit amet
+            consectetur adipisicing elit. Dolorem
+            reprehenderit quo doloremque! Veniam vel eveniet sapiente itaque explicabo perferendis atque unde, fuga
+            quia! Corporis dolores iure eos iste ea est.</p>
+          <button class="mx-auto flex flex-col items-center object-show" style="transition-delay: 0.6s">
+            <span class="text-xs uppercase tracking-widest text-slate-400">Scroll down</span>
+            <span class="mt-4 inline-block text-7xl text-slate-700">&#11107;</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="flex items-stretch overflow-x-hidden bg-black speaker_container">
+      <div class="inline-block min-h-screen w-full flex flex-col justify-center min-w-full py-14 pt-40 speaker_section">
+        <div class="mx-auto max-w-6xl text-white">
+          <h2
+            class="bg-gradient-to-b from-green-400 to-blue-700 bg-clip-text text-center text-5xl font-semibold text-transparent text-blur md:text-8xl">
+            Guess who is <br />
+            coming for this event <br />
+            ?
+          </h2>
+        </div>
+      </div>
+      <template x-for="(speaker,index) in speakers" :key="index">
+        <div class="inline-block min-h-screen min-w-full flex flex-col px-4 justify-center py-14 pt-40 speaker_section">
+          <div class="mx-auto flex max-w-6xl w-full items-center relative justify-between">
+            <span
+              class="absolute z-0 block font-extrabold bg-gradient-to-b from-gray-700 to-black bg-clip-text text-transparent opacity-50 md:opacity-100 text-blur"
+              style="left: 50%; margin-left: -8%;font-size: 400px; transition-delay: 0.5s" x-text="index + 1"></span>
+            <div class="w-full md:w-5/12 relative z-10">
+              <div class="mb-10">
+                <h3 class="text-xs uppercase tracking-widest text-slate-400">Topic</h3>
+                <p class="text-3xl md:text-4xl font-bold bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent relative fade-left"
+                  x-text="speaker.topic"></p>
+              </div>
+              <div class="mb-10">
+                <h3 class="text-xs uppercase tracking-widest mb-3 text-slate-400">Speaker</h3>
+                <div class="flex gap-4 items-center">
+                  <div class="w-20 h-20 rounded-full flex items-center justify-center relative overflow-hidden">
+                    <template x-if="speaker.gender === 'female'">
+                      <img
+                      src="./img/female.png"
+                      class="z-10 relative w-full h-full object-center object-cover object-show"
+                      style="transition-delay: 0.2s" alt="">
+                    </template>
+                    <template x-if="speaker.gender === 'male'">
+                      <img
+                      src="./img/male.png"
+                      class="z-10 relative w-full h-full object-center object-cover object-show"
+                      style="transition-delay: 0.2s" alt="">
+                    </template>
+                  </div>
+                  <div class="fade-left" style="transition-delay: 0.4s">
+                    <p class="text-2xl font-bold text-white" x-text="speaker.name"></p>
+                    <span class="text-slate-500" x-text="speaker.title"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="hidden md:block w-full md:w-4/12 z-10">
+              <div class="border-4 border-slate-600 bg-black rounded-t-full h-96">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div
+        class="inline-flex min-h-screen w-full min-w-full py-14 pt-40 flex-col justify-center items-center speaker_section">
+        <div class="mx-auto max-w-6xl text-white">
+          <h2
+            class="bg-gradient-to-b mb-9 from-red-400 to-blue-700 bg-clip-text text-center text-5xl font-semibold text-transparent shadow-green-800 drop-shadow-2xl md:text-8xl">
+            Woohoo !
+          </h2>
+          <p class="text-center text-slate-500">Thanks for attending Devfest 2022</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/CustomEase.min.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="./js/app.js"></script>
+
+</html>
